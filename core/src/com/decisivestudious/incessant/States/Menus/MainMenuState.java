@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.decisivestudious.incessant.States.State;
 import com.decisivestudious.incessant.States.StateManager;
+import com.decisivestudious.incessant.UI.Styles;
 
 import java.util.Random;
 
@@ -33,10 +34,6 @@ public class MainMenuState implements State{
     private Texture background;
     private Texture menuTitle = new Texture(Gdx.files.internal("UI/YeOlde.png"));
     private Table table;
-    private Texture UI = new Texture(Gdx.files.internal("UI/MainMenuButtons.png"));
-    TextureRegion upRegion = new TextureRegion(UI,0,0,200,35);
-    TextureRegion downRegion = new TextureRegion(UI,0,35,200,35);
-    BitmapFont buttonFont = new BitmapFont();
 
     public MainMenuState(StateManager stateManager){
         this.stateManager = stateManager;
@@ -84,10 +81,7 @@ public class MainMenuState implements State{
         table.setFillParent(true);
         stage.addActor(table);
 
-        TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
-        style.up = new TextureRegionDrawable(upRegion);
-        style.over = new TextureRegionDrawable(downRegion);
-        style.font = buttonFont;
+        TextButton.TextButtonStyle style = Styles.basicTextButtonStyle;
 
         Image image = new Image(menuTitle);
         table.add(image);

@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.decisivestudious.incessant.Managers.EventManager;
 import com.decisivestudious.incessant.Managers.SocketManager;
-import com.decisivestudious.incessant.States.Menus.MainMenuState;
+import com.decisivestudious.incessant.UI.Styles;
 
 /**
  * Created by Immortan on 7/30/2016.
@@ -32,7 +32,12 @@ public class StateManager implements InputProcessor{
     public StateManager(Batch batch){
         this.batch = batch;
         initializeConsole();
+        initializeComponenets();
         setState(new SplashState(this));
+    }
+
+    private void initializeComponenets() {
+        Styles styleManager = new Styles();
     }
 
     //Replaces current state with new state

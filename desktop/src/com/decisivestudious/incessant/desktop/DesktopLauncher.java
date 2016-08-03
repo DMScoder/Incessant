@@ -7,7 +7,7 @@ import com.decisivestudious.incessant.Incessant;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.useGL30 = true;
+		config.useGL30 = false;
 		config.height = 1080;
 		config.width = 1920;
 		config.vSyncEnabled = true;
