@@ -36,10 +36,10 @@ public class SplashState implements State{
         if(currentTicks>=totalTicks)
             stateManager.setState(mainMenuState);
 
-        color1.add(0.002f,0.003f,0.002f,0);
-        color2.add(0.002f,0.002f,0.003f,0);
-        color3.add(0.002f,0.002f,0.003f,0);
-        color4.add(0.002f,0.003f,0.002f,0);
+        color1.add(0.003f,0.000f,0.000f,0);
+        color2.add(0.003f,0.000f,0.000f,0);
+        color3.add(0.000f,0.000f,0.000f,0);
+        color4.add(0.000f,0.000f,0.000f,0);
     }
 
     @Override
@@ -58,6 +58,11 @@ public class SplashState implements State{
     public void dispose() {
         shapeRenderer.dispose();
         texture.dispose();
+    }
+
+    @Override
+    public void socketMessage(String string) {
+
     }
 
     @Override

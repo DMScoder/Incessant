@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.decisivestudious.incessant.States.Battle.TestChatState;
 import com.decisivestudious.incessant.States.State;
 import com.decisivestudious.incessant.States.StateManager;
 import com.decisivestudious.incessant.UI.Styles;
@@ -59,6 +60,11 @@ public class MainMenuState implements State{
     }
 
     @Override
+    public void socketMessage(String string) {
+
+    }
+
+    @Override
     public Stage getUI() {
         return stage;
     }
@@ -91,7 +97,7 @@ public class MainMenuState implements State{
         TextButton button1 = new TextButton("Quick Battle", style);
         button1.addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y){
-
+                stateManager.setState(new TestChatState(stateManager));
             }
         });
         table.add(button1);

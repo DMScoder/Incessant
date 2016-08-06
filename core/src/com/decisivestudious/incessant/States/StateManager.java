@@ -4,9 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.decisivestudious.incessant.Managers.EventManager;
 import com.decisivestudious.incessant.Managers.SocketManager;
 import com.decisivestudious.incessant.UI.Styles;
@@ -20,9 +24,11 @@ public class StateManager implements InputProcessor{
     private Batch batch;
     private State currentState;
     private State oldState;
-    private SocketManager socketManager = new SocketManager();
+    private SocketManager socketManager = new SocketManager(this);
     private EventManager eventManager = new EventManager();
     private InputMultiplexer inputMultiplexer = new InputMultiplexer();
+    private Viewport viewport;
+    private Camera camera = new OrthographicCamera(1920,1080);
 
     //Console
     private boolean isConsoleOpen;
@@ -32,11 +38,14 @@ public class StateManager implements InputProcessor{
     public StateManager(Batch batch){
         this.batch = batch;
         initializeConsole();
-        initializeComponenets();
+        initializeComponents();
+
+        viewport = new StretchViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight(),camera);
+        viewport.update(Gdx.graphics.getWidth(),Gdx.graphics.getHeight(),true);
         setState(new SplashState(this));
     }
 
-    private void initializeComponenets() {
+    private void initializeComponents() {
         Styles styleManager = new Styles();
     }
 
@@ -48,6 +57,7 @@ public class StateManager implements InputProcessor{
             currentState.dispose();
         }
         currentState = newState;
+        currentState.getUI().setViewport(viewport);
         inputMultiplexer.addProcessor(currentState.getUI());
     }
 
@@ -56,6 +66,7 @@ public class StateManager implements InputProcessor{
         inputMultiplexer.removeProcessor(currentState.getUI());
         oldState = currentState;
         currentState=newState;
+        currentState.getUI().setViewport(viewport);
         inputMultiplexer.addProcessor(currentState.getUI());
     }
 
@@ -105,8 +116,8 @@ public class StateManager implements InputProcessor{
         //currentState.consoleCommand("pause");
     }
 
-    public InputMultiplexer getInputMultiplexer(){
-        return inputMultiplexer;
+    public SocketManager getSocketManager(){
+        return socketManager;
     }
 
     private boolean runGlobalCommandCheck(){

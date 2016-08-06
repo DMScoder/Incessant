@@ -11,6 +11,7 @@ public interface State {
     void update();
     void draw(Batch batch);
     void dispose();
+    void socketMessage(String string);
     Stage getUI();
     boolean consoleCommand(String command);
     boolean keyDown(int keycode);

@@ -25,7 +25,7 @@ public class Styles {
     public Styles() {
         basicTextButtonStyle = new TextButton.TextButtonStyle();
         basicTextButtonStyle.up = new TextureRegionDrawable(upRegion);
-        basicTextButtonStyle.down = new TextureRegionDrawable(downRegion);
+        basicTextButtonStyle.over = new TextureRegionDrawable(downRegion);
         basicTextButtonStyle.font = buttonFont;
 
         labelStyle = new Label.LabelStyle();

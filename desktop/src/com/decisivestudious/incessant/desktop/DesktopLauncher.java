@@ -10,7 +10,6 @@ public class DesktopLauncher {
 		config.useGL30 = false;
 		config.height = 1080;
 		config.width = 1920;
-		config.vSyncEnabled = true;
 		config.fullscreen = true;
 		new LwjglApplication(new Incessant(), config);
 	}

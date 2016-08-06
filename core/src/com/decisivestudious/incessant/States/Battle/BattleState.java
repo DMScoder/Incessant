@@ -27,6 +27,11 @@ public class BattleState implements State {
     }
 
     @Override
+    public void socketMessage(String string) {
+
+    }
+
+    @Override
     public Stage getUI() {
         return stage;
     }
