@@ -30,6 +30,14 @@ public class SocketManager implements Runnable{
         listeningThread.start();
     }
 
+    public void restartService() {
+        if(listening)
+            return;
+
+        Thread listeningThread = new Thread(this);
+        listeningThread.start();
+    }
+
     private void setListener() {
         try {
             socket = new Socket(serverAddress,portNumber);
@@ -42,7 +50,6 @@ public class SocketManager implements Runnable{
             }
         } catch (IOException e) {
             listening = false;
-            e.printStackTrace();
         }
 
         while(listening) {
@@ -55,7 +62,8 @@ public class SocketManager implements Runnable{
         }
 
         try {
-            socket.close();
+            if(socket!=null)
+                socket.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

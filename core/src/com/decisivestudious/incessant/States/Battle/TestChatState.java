@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.decisivestudious.incessant.Managers.SocketManager;
@@ -48,6 +49,17 @@ public class TestChatState implements State {
         initializeButtons();
     }
 
+    private void sendMessage() {
+        if(currentMessage.length()==0)
+            return;
+        socketManager.transferString("Message"+currentMessage);
+        messages.add(displayName+": "+currentMessage);
+        currentMessage = "";
+        messageArea.setText(currentMessage);
+        if(messages.size()>maxMessages)
+            messages.removeFirst();
+    }
+
     private void createTextTable(){
         socketManager.transferString("Entering"+displayName);
 
@@ -61,14 +73,7 @@ public class TestChatState implements State {
         TextButton submitButton = new TextButton("Send", Styles.basicTextButtonStyle);
             submitButton.addListener(new ClickListener(){
                 public void clicked(InputEvent event, float x, float y){
-                    if(currentMessage.length()==0)
-                        return;
-                    socketManager.transferString("Message"+currentMessage);
-                    messages.add(displayName+": "+currentMessage);
-                    currentMessage = "";
-                    messageArea.setText(currentMessage);
-                    if(messages.size()>maxMessages)
-                        messages.removeFirst();
+                    sendMessage();
                 }
         });
         TextButton exit = new TextButton("Exit", Styles.basicTextButtonStyle);
@@ -88,7 +93,7 @@ public class TestChatState implements State {
         table = new Table();
 
         table.setFillParent(true);
-        table.align(Align.bottom);
+        table.align(Align.center);
         stage.addActor(table);
 
         Label label = new Label("Enter your display name:",Styles.labelStyle);
@@ -175,6 +180,8 @@ public class TestChatState implements State {
                 currentMessage = currentMessage.substring(0,currentMessage.length()-1);
                 messageArea.setText(currentMessage);
             }
+            else if(keycode == Input.Keys.ENTER)
+                sendMessage();
         }
         return false;
     }
@@ -213,13 +220,13 @@ public class TestChatState implements State {
     public boolean keyTyped(char character) {
 
         if(nameSelection){
-            if(Character.isLetter(character)&&displayName.length()<26){
+            if(Character.isLetterOrDigit(character)&&displayName.length()<26){
                 displayName = displayName + character;
                 nameField.setText(displayName);
             }
         }
         else if(!nameSelection){
-            if((Character.isLetter(character)||character==' ')&&displayName.length()<100){
+            if((Character.isLetterOrDigit(character)||character==' ')&&displayName.length()<100){
                 currentMessage = currentMessage + character;
                 messageArea.setText(currentMessage);
             }
