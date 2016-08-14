@@ -14,7 +14,7 @@ import java.net.Socket;
  */
 public class SocketManager implements Runnable{
 
-    private static final String serverAddress = "54.149.125.93";
+    private static final String serverAddress = "54.213.145.190";
     private static final int portNumber = 9090;
     private String answer = "Not connected";
     private StateManager stateManager;
@@ -22,20 +22,19 @@ public class SocketManager implements Runnable{
     private PrintWriter out;
     private BufferedReader input;
     private boolean listening = false;
+    Thread listeningThread;
     Socket socket = null;
 
     public SocketManager(StateManager stateManager) {
         this.stateManager = stateManager;
-        Thread listeningThread = new Thread(this);
+        listeningThread = new Thread(this);
         listeningThread.start();
     }
 
-    public void restartService() {
-        if(listening)
-            return;
-
-        Thread listeningThread = new Thread(this);
-        listeningThread.start();
+    public void endService() {
+        transferString("Exit");
+        activeState = null;
+        setListening(false);
     }
 
     private void setListener() {
@@ -46,16 +45,17 @@ public class SocketManager implements Runnable{
             input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             answer = input.readLine();
             if(socket!=null){
-                listening = true;
+                setListening(true);
             }
         } catch (IOException e) {
-            listening = false;
+            setListening(false);
         }
 
-        while(listening) {
+        while(getListening()) {
             try {
                 String string = input.readLine();
-                activeState.socketMessage(string);
+                if(activeState!=null)
+                    activeState.socketMessage(string);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -95,5 +95,13 @@ public class SocketManager implements Runnable{
     @Override
     public void run() {
         setListener();
+    }
+
+    private synchronized boolean getListening() {
+        return listening;
+    }
+
+    private synchronized void setListening(boolean value){
+        listening = value;
     }
 }

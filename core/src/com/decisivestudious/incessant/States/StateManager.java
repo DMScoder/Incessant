@@ -24,8 +24,8 @@ public class StateManager implements InputProcessor{
     private Batch batch;
     private State currentState;
     private State oldState;
-    private SocketManager socketManager = new SocketManager(this);
-    private EventManager eventManager = new EventManager();
+    private SocketManager socketManager;
+    private EventManager eventManager;
     private InputMultiplexer inputMultiplexer = new InputMultiplexer();
     private Viewport viewport;
     private Camera camera = new OrthographicCamera(1920,1080);
@@ -47,6 +47,7 @@ public class StateManager implements InputProcessor{
 
     private void initializeComponents() {
         Styles styleManager = new Styles();
+        eventManager = new EventManager();
     }
 
     //Replaces current state with new state
@@ -89,7 +90,7 @@ public class StateManager implements InputProcessor{
             batch.begin();
             font.setColor(Color.RED);
             font.draw(batch,"Console:",200,Gdx.graphics.getHeight()-10);
-            font.draw(batch,socketManager.getAnswer(),200,Gdx.graphics.getHeight()-22);
+            //font.draw(batch,socketManager.getAnswer(),200,Gdx.graphics.getHeight()-22);
             font.setColor(Color.GREEN);
             font.draw(batch,consoleString,200,Gdx.graphics.getHeight()-34);
             batch.end();
@@ -119,9 +120,13 @@ public class StateManager implements InputProcessor{
     public SocketManager getSocketManager(){
         return socketManager;
     }
+    public void setSocketManager(SocketManager socketManager){
+        this.socketManager = socketManager;
+    }
 
     private boolean runGlobalCommandCheck(){
         if(consoleString.equals("exit")){
+            socketManager.endService();
             Gdx.app.exit();
             return true;
         }

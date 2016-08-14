@@ -43,7 +43,7 @@ public class TestChatState implements State {
     Label messageArea;
 
     public TestChatState(StateManager statemanager){
-        socketManager = statemanager.getSocketManager();
+        socketManager = new SocketManager(statemanager);
         socketManager.setActiveState(this);
         this.statemanager = statemanager;
         initializeButtons();
@@ -79,7 +79,7 @@ public class TestChatState implements State {
         TextButton exit = new TextButton("Exit", Styles.basicTextButtonStyle);
         exit.addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y){
-                socketManager.transferString("Leaving");
+                socketManager.endService();
                 statemanager.setState(new MainMenuState(statemanager));
             }
         });
