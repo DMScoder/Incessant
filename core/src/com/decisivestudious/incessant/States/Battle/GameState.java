@@ -7,7 +7,7 @@ import com.decisivestudious.incessant.States.State;
 /**
  * Created by Immortan on 7/30/2016.
  */
-public class BattleState implements State {
+public class GameState implements State {
 
     private Stage stage;
 

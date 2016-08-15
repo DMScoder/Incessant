@@ -16,6 +16,7 @@ public class Styles {
 
     public static TextButton.TextButtonStyle basicTextButtonStyle;
     public static Label.LabelStyle labelStyle;
+    public static TextButton.TextButtonStyle togglableTextButtonStyle;
 
     private Texture UI = new Texture(Gdx.files.internal("UI/MainMenuButtons.png"));
     TextureRegion upRegion = new TextureRegion(UI,0,0,200,35);
@@ -27,6 +28,11 @@ public class Styles {
         basicTextButtonStyle.up = new TextureRegionDrawable(upRegion);
         basicTextButtonStyle.over = new TextureRegionDrawable(downRegion);
         basicTextButtonStyle.font = buttonFont;
+
+        togglableTextButtonStyle = new TextButton.TextButtonStyle();
+        togglableTextButtonStyle.up = new TextureRegionDrawable(upRegion);
+        togglableTextButtonStyle.checked = new TextureRegionDrawable(downRegion);
+        togglableTextButtonStyle.font = buttonFont;
 
         labelStyle = new Label.LabelStyle();
         labelStyle.font = buttonFont;

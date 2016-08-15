@@ -43,9 +43,11 @@ public class TestChatState implements State {
     Label messageArea;
 
     public TestChatState(StateManager statemanager){
-        socketManager = new SocketManager(statemanager);
-        socketManager.setActiveState(this);
         this.statemanager = statemanager;
+
+        socketManager = statemanager.getSocketManager();
+        socketManager.startService(this);
+
         initializeButtons();
     }
 
@@ -153,7 +155,6 @@ public class TestChatState implements State {
     public void dispose() {
         stage.clear();
         stage.dispose();
-        socketManager.deactivateState();
     }
 
     @Override

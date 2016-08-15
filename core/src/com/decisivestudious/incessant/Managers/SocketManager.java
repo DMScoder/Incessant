@@ -27,8 +27,12 @@ public class SocketManager implements Runnable{
 
     public SocketManager(StateManager stateManager) {
         this.stateManager = stateManager;
+    }
+
+    public void startService(State state) {
         listeningThread = new Thread(this);
         listeningThread.start();
+        setActiveState(state);
     }
 
     public void endService() {
@@ -80,7 +84,7 @@ public class SocketManager implements Runnable{
 
     }
 
-    public void setActiveState(State activeState){
+    public synchronized void setActiveState(State activeState){
         this.activeState = activeState;
     }
 

@@ -4,19 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.decisivestudious.incessant.States.Battle.TestChatState;
+import com.decisivestudious.incessant.States.Battle.BattleSelectionState;
 import com.decisivestudious.incessant.States.State;
 import com.decisivestudious.incessant.States.StateManager;
 import com.decisivestudious.incessant.UI.Styles;
@@ -72,7 +67,7 @@ public class MainMenuState implements State{
     private void createBackground(){
         //Select background
         Random random = new Random();
-        int backgroundNumber = random.nextInt(5)+1;
+        int backgroundNumber = random.nextInt(6)+1;
         background = new Texture(Gdx.files.internal("Artwork/background"+backgroundNumber+".jpeg"));
 
         //Add to stage
@@ -97,7 +92,8 @@ public class MainMenuState implements State{
         TextButton button1 = new TextButton("Quick Battle", style);
         button1.addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y){
-                stateManager.setState(new TestChatState(stateManager));
+                stateManager.setState(new BattleSelectionState(stateManager));
+                //stateManager.setState(new TestChatState(stateManager));
             }
         });
         table.add(button1);

@@ -11,7 +11,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.decisivestudious.incessant.Managers.EventManager;
+import com.decisivestudious.incessant.Managers.Events.EventManager;
 import com.decisivestudious.incessant.Managers.SocketManager;
 import com.decisivestudious.incessant.UI.Styles;
 
@@ -47,7 +47,8 @@ public class StateManager implements InputProcessor{
 
     private void initializeComponents() {
         Styles styleManager = new Styles();
-        eventManager = new EventManager();
+        eventManager = new EventManager(this);
+        socketManager = new SocketManager(this);
     }
 
     //Replaces current state with new state
@@ -60,6 +61,7 @@ public class StateManager implements InputProcessor{
         currentState = newState;
         currentState.getUI().setViewport(viewport);
         inputMultiplexer.addProcessor(currentState.getUI());
+        socketManager.deactivateState();
     }
 
     //Used to preserve previous state (add on menu)
