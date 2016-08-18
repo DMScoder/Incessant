@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.decisivestudious.incessant.States.State;
 import com.decisivestudious.incessant.States.StateManager;
 
@@ -17,11 +18,36 @@ public class ArmyCreatorState implements State {
 
     public ArmyCreatorState(StateManager stateManager){
         this.stateManager = stateManager;
+        initializeLayout();
+    }
+
+    private void initializeLayout(){
+        stage = new Stage();
+        Table root = new Table();
+        root.setFillParent(true);
+        stage.addActor(root);
+        initializeTacticsSelection(root);
+        initializeUnitSelection(root);
+        initializeSelectedUnits(root);
+        initializeEquipment(root);
+    }
+
+    private void initializeEquipment(Table root) {
+
+    }
+
+    private void initializeSelectedUnits(Table root) {
+    }
+
+    private void initializeUnitSelection(Table root) {
+    }
+
+    private void initializeTacticsSelection(Table root) {
     }
 
     @Override
     public void update() {
-
+        stage.act();
     }
 
     @Override

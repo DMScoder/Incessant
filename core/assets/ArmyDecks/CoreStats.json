@@ -1,0 +1,71 @@
+{
+  "units": {
+    "legionary":{
+      "health":100,
+      "armor":50,
+      "agility":3,
+      "melee_attack":7,
+      "melee_defense":10,
+      "cost":100,
+      "morale":40,
+      "faction":"roman",
+      "traits":[
+        "disciplined",
+        "swift",
+        "armored"
+      ],
+      "equippable_items":[
+        "scutum",
+        "gladius"
+      ],
+      "card_image":"Legionary.png"
+    }
+  },
+  "equipment": {
+    "scutum":{
+      "type": "shield",
+      "armor_bonus": 35,
+      "size": "large"
+    },
+    "gladius":{
+      "type:": "melee",
+      "damage": "30",
+      "armor_piercing": false,
+      "traits":[
+        ]
+    },
+    "plumbata":{
+      "type:": "ranged",
+      "damage": "20",
+      "range": "5",
+      "stock": "5",
+      "armor_piercing": false,
+      "traits":[
+        ]
+    },
+    "galea":{
+      "type": "helmet",
+      "armor_bonus": 20,
+      "traits":[
+        ]
+    },
+    "manica":{
+      "type": "body_armor",
+      "armor_bonus": 40,
+      "traits":[
+        "heavy"
+        ]
+    },
+    "roman_pack":{
+      "type": "misc",
+      "traits":[
+        "extra_capacity"
+        ]
+    }
+  },
+  "tactics": {
+    "testudo":{
+      "faction": "roman"
+    }
+  }
+}

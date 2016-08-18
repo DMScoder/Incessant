@@ -28,9 +28,9 @@ public class BattleSelectionState implements State {
 
     //Deck options
     private Table deckSelector;
-    private Texture RomeIcon = new Texture(Gdx.files.internal("UI/RomeIcon.jpg"));
-    private Texture JapanIcon = new Texture(Gdx.files.internal("UI/JapanIcon.jpg"));
-    private Texture MedievalIcon = new Texture(Gdx.files.internal("UI/MedievalIcon.jpg"));
+    private Texture RomeIcon = new Texture(Gdx.files.internal("UI/RomeIcon.png"));
+    private Texture JapanIcon = new Texture(Gdx.files.internal("UI/JapanIcon.png"));
+    private Texture MedievalIcon = new Texture(Gdx.files.internal("UI/MedievalIcon.png"));
 
     //Battle options
     private Table options;
@@ -48,7 +48,7 @@ public class BattleSelectionState implements State {
         stage = new Stage();
         root = new Table();
         root.setFillParent(true);
-        root.setDebug(true);
+        //root.setDebug(true);
         stage.addActor(root);
 
         //Create sub tables
@@ -152,7 +152,7 @@ public class BattleSelectionState implements State {
         for(int i=0;i<100;i++){
             int faction = random.nextInt(3);
 
-            Image image = null;
+            Image image;
             if(faction==0){
                 image = new Image(RomeIcon);
             }
@@ -162,7 +162,7 @@ public class BattleSelectionState implements State {
             else
                 image = new Image(MedievalIcon);
 
-            scrollTable.add(image).size(30,30);
+            scrollTable.add(image).size(50,50);
 
             scrollTable.add(new Label("Text"+i,Styles.labelStyle));
             scrollTable.row();
