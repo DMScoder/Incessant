@@ -4,9 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.decisivestudious.incessant.States.State;
 import com.decisivestudious.incessant.States.StateManager;
+import com.decisivestudious.incessant.UI.Styles;
+import com.sun.javafx.scene.control.skin.TextInputControlSkin;
 
 /**
  * Created by Immortan on 7/31/2016.
@@ -14,7 +19,8 @@ import com.decisivestudious.incessant.States.StateManager;
 public class ArmyCreatorState implements State {
 
     private StateManager stateManager;
-    private Stage stage;
+    private Stage stage = new Stage();
+    private String activeFaction = "";
 
     public ArmyCreatorState(StateManager stateManager){
         this.stateManager = stateManager;
@@ -22,14 +28,27 @@ public class ArmyCreatorState implements State {
     }
 
     private void initializeLayout(){
-        stage = new Stage();
         Table root = new Table();
         root.setFillParent(true);
         stage.addActor(root);
+        initializeHeader(root);
         initializeTacticsSelection(root);
         initializeUnitSelection(root);
         initializeSelectedUnits(root);
         initializeEquipment(root);
+    }
+
+    private void initializeHeader(Table root) {
+        Label label = new Label("Army Creation", Styles.labelStyle);
+        TextField textField = new TextField("Army name: ",Styles.textFieldStyle);
+        TextButton confirmButton = new TextButton("Set name",Styles.basicTextButtonStyle);
+        root.add(label);
+        root.row();
+        root.add(textField);
+        root.add(confirmButton);
+        root.row();
+
+
     }
 
     private void initializeEquipment(Table root) {

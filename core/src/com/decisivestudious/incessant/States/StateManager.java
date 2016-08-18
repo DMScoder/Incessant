@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.decisivestudious.incessant.Managers.Events.EventManager;
 import com.decisivestudious.incessant.Managers.SocketManager;
+import com.decisivestudious.incessant.Managers.SoundManager;
 import com.decisivestudious.incessant.UI.Styles;
 
 /**
@@ -25,7 +26,7 @@ public class StateManager implements InputProcessor{
     private State currentState;
     private State oldState;
     private SocketManager socketManager;
-    private EventManager eventManager;
+    private SoundManager soundManager;
     private InputMultiplexer inputMultiplexer = new InputMultiplexer();
     private Viewport viewport;
     private Camera camera = new OrthographicCamera(1920,1080);
@@ -43,11 +44,12 @@ public class StateManager implements InputProcessor{
         viewport = new StretchViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight(),camera);
         viewport.update(Gdx.graphics.getWidth(),Gdx.graphics.getHeight(),true);
         setState(new SplashState(this));
+        soundManager.playMusic(2);
     }
 
     private void initializeComponents() {
         Styles styleManager = new Styles();
-        eventManager = new EventManager(this);
+        soundManager = new SoundManager();
         socketManager = new SocketManager(this);
     }
 
@@ -226,5 +228,9 @@ public class StateManager implements InputProcessor{
         if(!isConsoleOpen)
             currentState.scrolled(amount);
         return false;
+    }
+
+    public SoundManager getSoundManager(){
+        return soundManager;
     }
 }

@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 /**
@@ -17,6 +18,7 @@ public class Styles {
     public static TextButton.TextButtonStyle basicTextButtonStyle;
     public static Label.LabelStyle labelStyle;
     public static TextButton.TextButtonStyle togglableTextButtonStyle;
+    public static TextField.TextFieldStyle textFieldStyle;
 
     private Texture UI = new Texture(Gdx.files.internal("UI/MainMenuButtons.png"));
     TextureRegion upRegion = new TextureRegion(UI,0,0,200,35);
@@ -33,6 +35,11 @@ public class Styles {
         togglableTextButtonStyle.up = new TextureRegionDrawable(upRegion);
         togglableTextButtonStyle.checked = new TextureRegionDrawable(downRegion);
         togglableTextButtonStyle.font = buttonFont;
+
+        textFieldStyle = new TextField.TextFieldStyle();
+        textFieldStyle.font = buttonFont;
+        textFieldStyle.background = new TextureRegionDrawable(downRegion);
+        textFieldStyle.fontColor = Color.BLUE;
 
         labelStyle = new Label.LabelStyle();
         labelStyle.font = buttonFont;
