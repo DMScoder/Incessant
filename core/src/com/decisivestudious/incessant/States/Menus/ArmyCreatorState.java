@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.decisivestudious.incessant.States.Battle.DeckStructure.GeneralCard;
 import com.decisivestudious.incessant.States.State;
 import com.decisivestudious.incessant.States.StateManager;
 import com.decisivestudious.incessant.UI.Styles;
@@ -21,6 +22,8 @@ public class ArmyCreatorState implements State {
     private StateManager stateManager;
     private Stage stage = new Stage();
     private String activeFaction = "";
+
+    private GeneralCard currentGeneral;
 
     public ArmyCreatorState(StateManager stateManager){
         this.stateManager = stateManager;
@@ -39,15 +42,18 @@ public class ArmyCreatorState implements State {
     }
 
     private void initializeHeader(Table root) {
-        Label label = new Label("Army Creation", Styles.labelStyle);
-        TextField textField = new TextField("Army name: ",Styles.textFieldStyle);
-        TextButton confirmButton = new TextButton("Set name",Styles.basicTextButtonStyle);
-        root.add(label);
-        root.row();
-        root.add(textField);
-        root.add(confirmButton);
+        Label armyNameLabel = new Label("Army Name", Styles.labelStyle);
+        TextField textField = new TextField("",Styles.textFieldStyle);
+        //TextButton confirmButton = new TextButton("Set name",Styles.basicTextButtonStyle);
+        root.add(armyNameLabel);
         root.row();
 
+        root.add(textField);
+        //root.add(confirmButton);
+        root.row();
+
+        Label generalNameLabel = new Label("General:",Styles.labelStyle);
+        root.add(generalNameLabel);
 
     }
 

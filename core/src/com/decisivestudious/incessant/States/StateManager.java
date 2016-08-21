@@ -16,6 +16,8 @@ import com.decisivestudious.incessant.Managers.SocketManager;
 import com.decisivestudious.incessant.Managers.SoundManager;
 import com.decisivestudious.incessant.UI.Styles;
 
+import java.util.Random;
+
 /**
  * Created by Immortan on 7/30/2016.
  */
@@ -44,6 +46,7 @@ public class StateManager implements InputProcessor{
         viewport = new StretchViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight(),camera);
         viewport.update(Gdx.graphics.getWidth(),Gdx.graphics.getHeight(),true);
         setState(new SplashState(this));
+        Random random = new Random();
         soundManager.playMusic(2);
     }
 
